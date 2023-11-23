@@ -1,0 +1,154 @@
+<!DOCTYPE html >
+<html lang="en" >
+<head >
+<meta charset="UTF-8" >
+<meta name="viewport" content="width=device-width, initial-scale=1.0" >
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,500&display=swap" >
+<style >
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+}
+
+body {
+    display: flex;
+    background-image: linear-gradient(to bottom right, #64b5f6, #1565c0);
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+header {
+    background: #123;
+    padding: 20px;
+    font-weight: 500;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.todo-container {
+    max-width: 400px;
+    margin: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    position: relative;
+}
+
+.todo-input,
+.date-input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 0 10px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    outline: none;
+    font-size: 16px;
+}
+
+.todo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+    .todo-item span {
+        flex-grow: 1;
+        margin-right: 10px;
+    }
+
+.delete-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.add-task-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    animation: floatButton 2s infinite alternate;
+}
+
+@keyframes floatButton {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+</style >
+<title > To-Do Application</title >
+</head >
+<body >
+<header >
+<h1 > To-Do Application</h1 >
+</header >
+<div class="todo-container" >
+<input type="text" class="todo-input" placeholder="Add a new task" id="newTaskInput" >
+<input type="date" class="date-input" id="newTaskDate" >
+<ul class="todo-list" id="taskList" > </ul >
+</div >
+<button class="add-task-btn" onclick="addTask()" > Add Task</button >
+
+<script >
+function addTask() {
+    var taskInput = document.getElementById('newTaskInput');
+    var taskDate = document.getElementById('newTaskDate');
+    var taskList = document.getElementById('taskList');
+    if (taskInput.value.trim() !== '')
+
+{
+    var taskItem = document.createElement('li');
+    taskItem .className = 'todo-item';
+    var taskText = document.createElement('span');
+    taskText .textContent = taskInput.value + ' - ' + taskDate.value;
+    taskItem .appendChild(taskText);
+    var deleteButton = document.createElement('button');
+    deleteButton .className = 'delete-button';
+    deleteButton .textContent = 'Delete';
+    deleteButton .onclick = function ()
+
+{
+    taskList .removeChild(taskItem);
+}
+
+;
+taskItem.appendChild(deleteButton);
+
+taskList.appendChild(taskItem);
+
+taskInput.value = '';
+taskDate.value = '';
+}
+}
+</script >
+</body >
+</html >
